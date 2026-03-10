@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TÍTULO OPTIMIZADO PARA SEO -->
+    <title>Maison Jo: Boutique de Moda Femenina con Estilo y Elegancia</title>
+    
+    <!-- META DESCRIPTION OPTIMIZADA PARA SEO -->
+    <meta name="description" content="Maison Jo es una boutique exclusiva de moda femenina que redefine la elegancia y el estilo en México. Descubre colecciones atemporales con acabados de lujo.">
+
+    <!-- ETIQUETAS OPEN GRAPH -->
+    <meta property="og:title" content="Maison Jo: Boutique de Moda Femenina con Estilo y Elegancia">
+    <meta property="og:description" content="Descubre la exclusividad en Maison Jo. Moda femenina que redefine la elegancia y el estilo con colecciones atemporales de lujo.">
+    <meta property="og:image" content="assets/img/foto-maisonjo3.jpg">
+    <meta property="og:url" content="https://www.maisonjo.mx">
+    <meta property="og:type" content="website">
+
+    <!-- ETIQUETAS TWITTER / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Maison Jo: Boutique de Moda Femenina con Estilo y Elegancia">
+    <meta name="twitter:description" content="Explora nuestra boutique exclusiva. Elegancia y estilo atemporal en cada prenda.">
+    <meta name="twitter:image" content="assets/img/foto-maisonjo3.jpg">
+
+    <!-- DATOS ESTRUCTURADOS JSON-LD PARA SEO E IA (COMBINADO ARTICLE & FAQ) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "Maison Jo: Estrategia de Moda y Lujo Silencioso en México",
+          "description": "Un análisis profundo sobre el posicionamiento de Maison Jo como marca boutique que redefine la elegancia femenina mediante el concepto de 'Quiet Luxury'.",
+          "author": {
+            "@type": "Person",
+            "name": "Jesús Enrique Carranza González"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Maison Jo"
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.maisonjo.mx"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es Maison Jo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Maison Jo es una casa de moda que fusiona la elegancia clásica con el dinamismo contemporáneo, ofreciendo una curaduría de piezas atemporales inspiradas en el arte y la cultura."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+<!-- FAVICON REPRESENTATIVO DE MODA ELEGANTE -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a3 3 0 0 1 3 3c0 .82-.33 1.56-.88 2.1l7.38 3.69a2 2 0 0 1 1.1 1.79V19a2 2 0 0 1-2 2H3.4a2 2 0 0 1-2-2v-6.42a2 2 0 0 1 1.1-1.79l7.38-3.69C10.33 6.56 10 5.82 10 5a3 3 0 0 1 2-3z'/%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'var(--color-primary)',
+                        secondary: 'var(--color-secondary)',
+                        background: 'var(--color-background)',
+                        text: 'var(--color-text)',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* VARIABLES DE DISEÑO GLOBALES */
+        :root {
+            --color-primary: #FFD6E4;    /* Rosa Suave */
+            --color-secondary: #FFFFFF;  /* Blanco */
+            --color-background: #FAF5E5; /* Champagne */
+            --color-text: #000000;       /* Negro */
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            margin: 0; padding: 0; line-height: 1.6;
+        }
+        h1, h2, h3, .brand-font { font-family: 'Bodoni Moda', serif; font-optical-sizing: auto; }
+        
+        /* ESTILOS OFF-CANVAS MENU */
+        #menu-backdrop {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 60;
+        }
+        #menu-backdrop.active { opacity: 1; visibility: visible; }
+
+        #side-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed;
+            top: 0; right: 0; height: 100%; width: 100%; max-width: 400px;
+            background-color: var(--color-background);
+            z-index: 70; display: flex; flex-direction: column; padding: 2rem;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+        #side-menu.active { transform: translateX(0); }
+
+        .menu-link {
+            transition: all 0.3s;
+            border-radius: 8px;
+            display: block; width: 100%; text-align: left; padding: 1.25rem 1rem;
+        }
+        .menu-link:hover {
+            background-color: var(--color-primary);
+            padding-left: 2rem;
+            font-family: 'Bodoni Moda', serif; font-style: italic;
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        section { padding-top: 7rem; padding-bottom: 7rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        section:last-of-type { border-bottom: none; }
+
+        .hero-banner {
+            position: relative;
+            width: 100%; height: 90vh; min-height: 600px;
+            background-image: url('assets/img/foto-maisonjo3.jpg');
+            background-size: cover; background-position: center 0; background-repeat: no-repeat;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 0 0 40px 40px; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .chart-container { position: relative; width: 100%; height: 350px; }
+
+        .footer-visual {
+            position: relative; background-color: var(--color-text); color: var(--color-secondary);
+            overflow: hidden; padding-top: 12rem; padding-bottom: 4rem;
+        }
+        .footer-bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(to top, var(--color-text) 30%, rgba(0,0,0,0.2) 100%), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center 20%; opacity: 0.7; z-index: 0;
+        }
+
+        .footer-logo-big {
+            font-size: clamp(7rem, 22vw, 18rem);
+            line-height: 0.8;
+            letter-spacing: -0.06em;
+            color: var(--color-primary);
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .instagram-icon-footer {
+            width: 28px; height: 28px; border: 2px solid var(--color-secondary); border-radius: 7px;
+            position: relative; display: flex; align-items: center; justify-content: center;
+        }
+        .instagram-icon-footer::before { content: ''; width: 12px; height: 12px; border: 2px solid var(--color-secondary); border-radius: 50%; }
+        .instagram-icon-footer::after { content: ''; width: 3px; height: 3px; background-color: var(--color-secondary); border-radius: 50%; position: absolute; top: 4px; right: 4px; }
+        
+        .footer-link-premium { position: relative; transition: all 0.3s ease; }
+        .footer-link-premium::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0; background-color: var(--color-primary); transition: width 0.3s ease; }
+        .footer-link-premium:hover::after { width: 100%; }
+
+        .pill-list li {
+            background: white; padding: 0.75rem 1.5rem; border-radius: 99px; font-weight: 500;
+            display: inline-block; margin-right: 0.5rem; margin-bottom: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        input[type="range"] {
+            accent-color: var(--color-primary);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-background/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="text-3xl brand-font font-bold text-text tracking-tight">Maison <span class="text-primary italic">Jo</span></span>
+                </div>
+                
+                <div class="flex items-center">
+                    <button id="hamburger-btn" onclick="toggleOffCanvas(true)" class="text-text hover:text-primary focus:outline-none p-3 rounded-full hover:bg-white/50 transition">
+                        <span id="menu-icon-text" class="text-4xl leading-none">☰</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERLAY BACKDROP -->
+    <div id="menu-backdrop" onclick="toggleOffCanvas(false)"></div>
+
+    <!-- SIDEBAR OFF-CANVAS MENU -->
+    <aside id="side-menu">
+        <div class="flex justify-between items-center mb-12">
+            <span class="text-2xl brand-font font-bold text-text">Maison <span class="text-primary italic">Jo</span></span>
+            <button onclick="toggleOffCanvas(false)" class="text-4xl text-text hover:text-primary transition">&times;</button>
+        </div>
+        
+        <nav class="flex-grow space-y-4">
+            <button onclick="scrollToSection('quienes-somos')" class="menu-link text-2xl font-semibold">01. ¿Quiénes somos?</button>
+            <button onclick="scrollToSection('nacimiento')" class="menu-link text-2xl font-semibold">02. El nacimiento de una casa</button>
+            <button onclick="scrollToSection('mujer-inspira')" class="menu-link text-2xl font-semibold">03. La mujer que inspira</button>
+            <button onclick="scrollToSection('references')" class="menu-link text-2xl font-semibold">04. Referencias y Tutoriales</button>
+            <button onclick="scrollToSection('analytics')" class="menu-link text-2xl font-semibold text-text">05. Analítica de Estilo</button>
+        </nav>
+
+        <div class="pt-8 border-t border-black/10">
+            <p class="text-xs uppercase tracking-[0.3em] font-bold text-gray-400 mb-6">Social</p>
+            <a href="https://www.instagram.com/maisonjo" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-xl hover:text-primary transition group">
+                <div class="instagram-icon-footer !border-black before:!border-black after:!bg-black group-hover:!border-primary group-hover:before:!border-primary group-hover:after:!bg-primary"></div>
+                <span>@maisonjo</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Banner Hero con Parallax -->
+    <div class="hero-banner" id="hero-parallax"></div>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+
+        <!-- SECCIÓN 1: ¿QUIÉNES SOMOS? -->
+        <section id="quienes-somos">
+            <div class="max-w-4xl mb-16">
+                <h2 class="text-5xl md:text-7xl font-bold mb-10 leading-[1.1] tracking-tighter text-text">01. ¿Quiénes somos?</h2>
+                <div class="space-y-6 text-xl md:text-2xl text-gray-700 leading-relaxed font-light">
+                    <p>Maison Jo es una casa de moda que nace de la conexión entre el arte, la cultura y la elegancia atemporal.</p>
+                    <p>Inspirada en el espíritu parisino y la sensibilidad mediterránea, la marca propone piezas contemporáneas con un carácter clásico que trasciende tendencias.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card p-10 bg-white shadow-sm border-l-4 border-primary">
+                    <h3 class="text-2xl font-bold mb-4">La Conexión</h3>
+                    <p class="text-gray-600 font-light">Nacemos del vínculo entre el arte, la cultura y la elegancia que trasciende el tiempo.</p>
+                </div>
+                <div class="card p-10 bg-white shadow-sm border-l-4 border-black">
+                    <h3 class="text-2xl font-bold mb-4">El Espíritu</h3>
+                    <p class="text-gray-600 font-light">Inspirados en la sofisticación de París y la vibrante sensibilidad mediterránea.</p>
+                </div>
+                <div class="card p-10 bg-white shadow-sm border-l-4 border-primary">
+                    <h3 class="text-2xl font-bold mb-4">El Carácter</h3>
+                    <p class="text-gray-600 font-light">Piezas contemporáneas con alma clásica diseñadas para durar en el guardarropa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: EL NACIMIENTO DE UNA CASA -->
+        <section id="nacimiento">
+            <div class="max-w-4xl mb-16">
+                <h2 class="text-5xl md:text-7xl font-bold mb-10 leading-[1.1] tracking-tighter text-text text-reveal">02. El nacimiento de una casa</h2>
+                <div class="space-y-6 text-xl md:text-2xl text-gray-700 leading-relaxed font-light">
+                    <p>Maison Jo nace del amor por la moda como lenguaje artístico e inspirada en la fuerza creativa del mundo ibérico.</p>
+                    <p>Cada colección es una curaduría pensada para permanecer más allá del tiempo.</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="md:w-1/2 space-y-6">
+                    <p class="text-2xl font-light text-gray-700 italic border-l-4 border-primary pl-8 py-4">
+                        "Maison Jo nace del amor por la moda como lenguaje artístico e inspirada en la fuerza creativa del mundo ibérico."
+                    </p>
+                    <p class="text-lg text-gray-600 font-light">
+                        Cada colección es una curaduría pensada para permanecer más allá del tiempo, alejándonos de lo efímero para abrazar lo permanente.
+                    </p>
+                </div>
+                <div class="md:w-1/2 card p-10 bg-black text-secondary flex flex-col justify-center">
+                    <h3 class="text-3xl brand-font mb-6 text-primary">Identidad & Carácter</h3>
+                    <ul class="space-y-4 text-gray-300 font-light">
+                        <li class="flex items-center gap-4">
+                            <span class="text-primary">✦</span> Sobriedad como estandarte visual.
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-primary">✦</span> Impacto basado en la excelencia.
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <span class="text-primary">✦</span> Narrativa visual auténtica.
+                        </li>
+                    </ul>
+                    <button onclick="scrollToSection('mujer-inspira')" class="bg-primary text-text px-8 py-4 rounded-full mt-10 font-bold uppercase tracking-widest text-xs hover:bg-secondary transition-all">Explorar La Musa</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: LA MUJER QUE INSPIRA -->
+        <section id="mujer-inspira">
+            <div class="max-w-4xl mb-16">
+                <h2 class="text-5xl md:text-7xl font-bold mb-10 leading-[1.1] tracking-tighter text-text text-reveal">03. La mujer que inspira</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <p class="text-xl text-gray-700 leading-relaxed font-light mb-8">
+                        Maison Jo diseña para un perfil específico: mujeres que entienden que el verdadero lujo está en la autenticidad.
+                    </p>
+                    <ul class="pill-list">
+                        <li>Independiente</li>
+                        <li>Curiosa</li>
+                        <li>Culta</li>
+                        <li>Cosmopolita</li>
+                        <li>Sensible al Arte</li>
+                    </ul>
+                </div>
+                <div class="bg-secondary p-12 border-l-8 border-primary italic shadow-sm flex items-center card">
+                    <p class="text-2xl font-light text-gray-700">
+                        "Diseñamos para quien busca piezas bien hechas, entendiendo que la moda es una extensión de su propia visión del mundo."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: REFERENCIAS Y TUTORIALES (IMAGEN CORREGIDA) -->
+        <section id="references">
+            <div class="max-w-4xl mb-12">
+                <h2 class="text-5xl md:text-7xl font-bold mb-10 leading-[1.1] tracking-tighter text-text text-reveal">04. Referencias y Tutoriales</h2>
+                <p class="text-xl md:text-2xl text-gray-700 leading-relaxed font-light mb-12">Visuales que capturan la esencia del lujo silencioso y la sofisticación de Maison Jo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Fuente 1 -->
+                <div class="card overflow-hidden group flex flex-col h-full">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1200&auto=format&fit=crop" alt="Pasarelas de Alta Costura" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <p class="text-sm text-gray-600 font-light leading-relaxed mb-8">Un recorrido visual por las colecciones de alta costura que dictan las pautas de la elegancia atemporal.</p>
+                        <a href="https://www.vogue.com/fashion-shows" target="_blank" class="mt-auto block w-full text-center py-4 bg-black text-white text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-black hover:shadow-[0_10px_20px_rgba(255,214,228,0.4)] transition-all duration-500 rounded-lg">Ver Inspiración</a>
+                    </div>
+                </div>
+
+                <!-- Fuente 2 (URL ACTUALIZADA) -->
+                <div class="card overflow-hidden group flex flex-col h-full">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?q=80&w=1200&auto=format&fit=crop" alt="Chic Parisino" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <p class="text-sm text-gray-600 font-light leading-relaxed mb-8">Dominando el arte del estilo parisino: cómo los básicos de calidad construyen un look sobrio y sofisticado.</p>
+                        <a href="https://www.lofficiel.com" target="_blank" class="mt-auto block w-full text-center py-4 bg-black text-white text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-black hover:shadow-[0_10px_20px_rgba(255,214,228,0.4)] transition-all duration-500 rounded-lg">Explorar Estilo</a>
+                    </div>
+                </div>
+
+                <!-- Fuente 3 -->
+                <div class="card overflow-hidden group flex flex-col h-full">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop" alt="Lujo Silencioso" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <p class="text-sm text-gray-600 font-light leading-relaxed mb-8">La filosofía detrás del lujo silencioso: donde la calidad material y la perfección del corte hablan por sí solas.</p>
+                        <a href="https://www.harpersbazaar.mx" target="_blank" class="mt-auto block w-full text-center py-4 bg-black text-white text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-black hover:shadow-[0_10px_20px_rgba(255,214,228,0.4)] transition-all duration-500 rounded-lg">Leer Referencias</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 flex items-center space-x-4 opacity-30">
+                <div class="h-[1px] flex-grow bg-text"></div>
+                <span class="brand-font text-2xl text-text">MJ</span>
+                <div class="h-[1px] flex-grow bg-text"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: ANALÍTICA DE ESTILO -->
+        <section id="analytics">
+            <div class="max-w-4xl mb-16">
+                <h2 class="text-5xl md:text-7xl font-bold mb-10 leading-[1.1] tracking-tighter text-text text-reveal">05. Analítica de Estilo</h2>
+                <p class="text-xl md:text-2xl text-gray-700 leading-relaxed font-light">Exploramos los pilares que definen el ADN de nuestra casa y las tendencias actuales del mercado.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Gráfico de Radar: Identidad de Marca -->
+                <div class="card p-10 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-8 text-center text-text">Esencia Maison Jo</h3>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-gray-400 mt-6 tracking-widest uppercase">Atributos Clave de Diseño</p>
+                </div>
+
+                <!-- Gráfico de Barras: Tendencias de Temporada -->
+                <div class="card p-10 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-8 text-center text-text">Tendencias 2026</h3>
+                    <div class="chart-container">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-gray-400 mt-6 tracking-widest uppercase">Preferencia de Consumo Mensual</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER PREMIUM -->
+    <footer class="footer-visual">
+        <div class="footer-bg-image"></div>
+        <div class="max-w-7xl mx-auto px-4 footer-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">
+                <div class="space-y-12">
+                    <p class="footer-logo-big brand-font">Maison <span class="text-secondary italic">Jo</span></p>
+                    <div class="flex flex-col space-y-4">
+                        <p class="text-xs uppercase tracking-[0.5em] text-primary font-bold">Presencia Digital</p>
+                        <a href="https://www.instagram.com/rossialonsov" target="_blank" rel="noopener noreferrer" class="text-4xl flex items-center gap-6 hover:text-primary transition-all group">
+                            <span class="instagram-icon-footer group-hover:border-primary"></span>
+                            <span class="lowercase tracking-tighter">maisonjo</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:text-right space-y-10">
+                    <div class="max-w-md lg:ml-auto">
+                        <p class="text-xl font-light text-gray-300 leading-relaxed italic">"La elegancia no consiste en destacar, sino en ser recordada."</p>
+                    </div>
+                    <div class="pt-10 border-t border-secondary/20 flex flex-col lg:items-end space-y-3">
+                        <p class="text-sm tracking-widest text-secondary font-medium">
+                            &copy; <span id="current-year"></span> Rossiel Alonso
+                        </p>
+                        <a href="https://campuscesine.com/my/" target="_blank" rel="noopener noreferrer" class="text-primary text-xs tracking-[0.2em] font-bold footer-link-premium uppercase">
+                            www.campuscesine.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const sideMenu = document.getElementById('side-menu');
+        const menuBackdrop = document.getElementById('menu-backdrop');
+        const body = document.body;
+
+        function toggleOffCanvas(isOpen) {
+            if (isOpen) {
+                sideMenu.classList.add('active');
+                menuBackdrop.classList.add('active');
+                body.style.overflow = 'hidden';
+            } else {
+                sideMenu.classList.remove('active');
+                menuBackdrop.classList.remove('active');
+                body.style.overflow = 'auto';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (!element) return;
+            toggleOffCanvas(false);
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+
+        const heroParallax = document.getElementById('hero-parallax');
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.pageYOffset;
+            if (scrollPos < window.innerHeight * 1.5) {
+                heroParallax.style.backgroundPositionY = (scrollPos * 0.4) + 'px';
+            }
+        });
+
+        // INICIALIZACIÓN DE GRÁFICOS (CHART.JS)
+        document.addEventListener('DOMContentLoaded', () => {
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            const barCtx = document.getElementById('barChart').getContext('2d');
+
+            // Radar Chart: Identidad de Marca
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Calidad', 'Sostenibilidad', 'Elegancia', 'Comodidad', 'Versatilidad'],
+                    datasets: [{
+                        label: 'ADN de Marca',
+                        data: [95, 88, 98, 82, 90],
+                        backgroundColor: 'rgba(255, 214, 228, 0.4)',
+                        borderColor: '#FFD6E4',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#000000'
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.05)' }, grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { display: false } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Bar Chart: Tendencias de Temporada
+            new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Luxe Silencioso', 'Sastrería', 'Básicos', 'Knitwear'],
+                    datasets: [{
+                        label: '% Preferencia',
+                        data: [45, 30, 25, 20],
+                        backgroundColor: ['#000000', '#FFD6E4', '#000000', '#FFD6E4'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, grid: { display: false }, ticks: { display: false } }, x: { grid: { display: false } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('reveal');
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
